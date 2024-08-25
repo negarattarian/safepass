@@ -4,25 +4,18 @@ include_once 'db.php';
 function user_login($fields)
 {
     $db = connection();
+    $sql = $db->query("SELECT * FROM user WHERE username='$fields[username]'");
+    $res = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    // Prepare and execute a safe query to prevent SQL Injection
-    $stmt = $db->prepare("SELECT * FROM user WHERE username = :username");
-    $stmt->bindParam(':username', $fields['username']);
-    $stmt->execute();
-    $res = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($res[0]['password'] == $fields['password']) {
+        $_SESSION['username'] = $res[0]['name'];
+        $_SESSION['userid'] = $res[0]['id'];
 
-    // Verify password (if passwords are hashed, use password_verify)
-    if ($res && $res['password'] === $fields['password']) {
-        $_SESSION['username'] = $res['name'];
-        $_SESSION['userid'] = $res['id'];
-
-        // Add log
-        $user_id = $res['id'];
+        // add log
+        $user_id = $res[0]['id'];
         $current_datetime = date('Y-m-d H:i:s');
-        $log_stmt = $db->prepare("INSERT INTO logs (action, user_id, datetime) VALUES ('1', :user_id, :datetime)");
-        $log_stmt->bindParam(':user_id', $user_id);
-        $log_stmt->bindParam(':datetime', $current_datetime);
-        $log_stmt->execute();
+        $sql = "INSERT INTO logs (action, user_id, datetime) VALUES ('1', '$user_id', '$current_datetime')";
+        $db->exec($sql);
 
         header("location:index.php");
     } else {
@@ -30,30 +23,27 @@ function user_login($fields)
     }
 }
 
+
 function user_register($fields)
 {
     $db = connection();
+    $username = $fields['username'];
+    $password = $fields['password'];
+    $name = $fields['name'];
 
-    // Prepare and execute a safe query to prevent SQL Injection
-    $stmt = $db->prepare("SELECT * FROM user WHERE username = :username");
-    $stmt->bindParam(':username', $fields['username']);
-    $stmt->execute();
-    $res = $stmt->fetch(PDO::FETCH_ASSOC);
+    $sql = $db->query("SELECT * FROM user WHERE username='$username'");
+    $res = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    // Check if username already exists
-    if ($res) {
+    if (count($res) > 0) {
         header("location:register.php?register=error");
     } else {
-        // Insert the new user data safely
-        $register_stmt = $db->prepare("INSERT INTO user (username, password, name) VALUES (:username, :password, :name)");
-        $register_stmt->bindParam(':username', $fields['username']);
-        $register_stmt->bindParam(':password', $fields['password']);
-        $register_stmt->bindParam(':name', $fields['name']);
-        $register_stmt->execute();
-
+        $sql = "INSERT INTO user (username, password, name) VALUES ('$username', '$password', '$name')";
+        $db->exec($sql);
         header("location:login.php");
     }
 }
+
+
 function add_password($fields)
 {
     $db = connection();
