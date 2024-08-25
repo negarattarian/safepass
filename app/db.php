@@ -5,10 +5,10 @@ const admin_password = "123";
 
 function connection()
 {
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
+//
+//    $servername = "localhost";
+//    $username = "root";
+//    $password = "";
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=safepass_db", $username, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
