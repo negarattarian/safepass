@@ -69,12 +69,12 @@ function show_passwords()
 
 //    echo $user_id;
 
-    $result = $db->query("
-        SELECT p.*, g.name as group_name 
-        FROM passwords p 
-        LEFT JOIN group_tbl g ON p.group_id = g.id where p.user_id = $user_id
-    ");
-    return $result->fetchAll(PDO::FETCH_ASSOC);
+//    $result = $db->query("
+//        SELECT p.*, g.name as group_name
+//        FROM passwords p
+//        LEFT JOIN group_tbl g ON p.group_id = g.id where p.user_id = $user_id
+//    ");
+//    return $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
 
