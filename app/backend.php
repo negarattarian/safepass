@@ -105,17 +105,17 @@ function add_password_group($fields)
     $user_id = $_SESSION['userid'];
     $created_date = date('Y-m-d H:i:s');
 
-//    // Insert the new group into the database
-//    $res = $db->query("INSERT INTO group_tbl (name, created_date, note, status, user_id) VALUES ('$fields[name]', '$created_date', '$fields[note]', '$fields[status]', '$user_id')");
-//
+    // Insert the new group into the database
+    $res = $db->query("INSERT INTO group_tbl (name, created_date, note, status, user_id) VALUES ('$fields[name]', '$created_date', '$fields[note]', '$fields[status]', '$user_id')");
+
 //    // Check if the group was added successfully
 //    if ($res) {
 //        // Log the action
 //        $current_datetime = date('Y-m-d H:i:s'); // Get current date and time
 //        $db->query("INSERT INTO logs (action, user_id, datetime) VALUES ('3', '$user_id', '$current_datetime')");
-    }
-
-    return $res;
+//    }
+//
+//    return $res;
 }
 
 function show_password_groups()
