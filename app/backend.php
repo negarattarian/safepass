@@ -108,14 +108,14 @@ function add_password_group($fields)
     // Insert the new group into the database
     $res = $db->query("INSERT INTO group_tbl (name, created_date, note, status, user_id) VALUES ('$fields[name]', '$created_date', '$fields[note]', '$fields[status]', '$user_id')");
 
-//    // Check if the group was added successfully
-//    if ($res) {
-//        // Log the action
-//        $current_datetime = date('Y-m-d H:i:s'); // Get current date and time
-//        $db->query("INSERT INTO logs (action, user_id, datetime) VALUES ('3', '$user_id', '$current_datetime')");
-//    }
-//
-//    return $res;
+    // Check if the group was added successfully
+    if ($res) {
+        // Log the action
+        $current_datetime = date('Y-m-d H:i:s'); // Get current date and time
+        $db->query("INSERT INTO logs (action, user_id, datetime) VALUES ('3', '$user_id', '$current_datetime')");
+    }
+
+    return $res;
 }
 
 function show_password_groups()
@@ -123,8 +123,8 @@ function show_password_groups()
     $db = connection();
     $user_id = $_SESSION['userid'];
 
-    $result = $db->query("SELECT * FROM group_tbl where user_id = '$user_id'");
-    return $result->fetchAll(PDO::FETCH_ASSOC);
+//    $result = $db->query("SELECT * FROM group_tbl where user_id = '$user_id'");
+//    return $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
 
