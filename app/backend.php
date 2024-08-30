@@ -67,18 +67,18 @@ function show_passwords()
     $db = connection();
     $user_id = $_SESSION['userid'];
 
-//    echo $user_id;
+    echo $user_id;
 
-//    $result = $db->query("
-//        SELECT p.*, g.name as group_name
-//        FROM passwords p
-//        LEFT JOIN group_tbl g ON p.group_id = g.id where p.user_id = $user_id
-//    ");
-//    return $result->fetchAll(PDO::FETCH_ASSOC);
+    $result = $db->query("
+        SELECT p.*, g.name as group_name
+        FROM passwords p
+        LEFT JOIN group_tbl g ON p.group_id = g.id where p.user_id = $user_id
+    ");
+    return $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
 
-gi
+
 
 function edit_password($fields, $id)
 {
@@ -88,7 +88,7 @@ function edit_password($fields, $id)
     $website = $fields['website'];
     $notes = $fields['notes'];
 
-    $db->query("UPDATE passwords SET username = '$username', password = '$password', website = '$website', notes = '$notes' WHERE id = '$id'");
+//    $db->query("UPDATE passwords SET username = '$username', password = '$password', website = '$website', notes = '$notes' WHERE id = '$id'");
 }
 
 
