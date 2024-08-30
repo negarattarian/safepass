@@ -88,15 +88,15 @@ function edit_password($fields, $id)
     $website = $fields['website'];
     $notes = $fields['notes'];
 
-//    $db->query("UPDATE passwords SET username = '$username', password = '$password', website = '$website', notes = '$notes' WHERE id = '$id'");
+    $db->query("UPDATE passwords SET username = '$username', password = '$password', website = '$website', notes = '$notes' WHERE id = '$id'");
 }
 
 
 function delete_password($id)
 {
     $db = connection();
-    $res = $db->query("DELETE FROM passwords WHERE id = '$id'");
-    return $res;
+//    $res = $db->query("DELETE FROM passwords WHERE id = '$id'");
+//    return $res;
 }
 
 function add_password_group($fields)
