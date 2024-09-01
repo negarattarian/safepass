@@ -132,16 +132,16 @@ function get_passwords_by_group($groupId)
 {
     $db = connection();
     $user_id = $_SESSION['userid'];
-//    $sql = $db->query("SELECT * FROM passwords WHERE group_id = '$groupId' and user_id = '$user_id'");
-//    return $sql->fetchAll(PDO::FETCH_ASSOC);
+    $sql = $db->query("SELECT * FROM passwords WHERE group_id = '$groupId' and user_id = '$user_id'");
+    return $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
 
 function show_group_by_id($id)
 {
     $db = connection();
-    $sql = $db->query("SELECT * FROM group_tbl WHERE id = '$id'");
-    return $sql->fetch(PDO::FETCH_ASSOC);
+//    $sql = $db->query("SELECT * FROM group_tbl WHERE id = '$id'");
+//    return $sql->fetch(PDO::FETCH_ASSOC);
 }
 
 
