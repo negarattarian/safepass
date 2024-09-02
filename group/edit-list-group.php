@@ -1,7 +1,7 @@
 <?php
 include_once 'app/backend.php';
 
-@$groups = show_password_groups();
+$groups = show_password_groups();
 ?>
 
 <div class="box box-info">
@@ -27,25 +27,25 @@ include_once 'app/backend.php';
                 </tr>
                 </thead>
                 <tbody>
-                <?php if (@$groups): ?>
+                <?php if ($groups && count($groups) > 0): ?>
                     <?php foreach ($groups as $group): ?>
                         <tr>
-                            <td><?php echo $group['name']; ?></td>
-                            <td><?php echo $group['note']; ?></td>
-                            <td><?php echo $group['created_date']; ?></td>
+                            <td><?php echo htmlspecialchars($group['name'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($group['note'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($group['created_date'], ENT_QUOTES, 'UTF-8'); ?></td>
                             <td>
                                 <button type="button" class="btn btn-sm <?php echo $group['status'] == '1' ? 'btn-success' : 'btn-danger'; ?>" style="pointer-events: none; cursor: default;">
                                     <?php echo $group['status'] == '1' ? 'فعال' : 'غیرفعال'; ?>
                                 </button>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm" onclick="editGroup(<?php echo $group['id']; ?>)">ویرایش</button>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="editGroup(<?php echo htmlspecialchars($group['id'], ENT_QUOTES, 'UTF-8'); ?>)">ویرایش</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="5">هیچ رکوردی یافت نشد</td>
+                        <td colspan="5" class="text-center">هیچ رکوردی یافت نشد.</td>
                     </tr>
                 <?php endif; ?>
                 </tbody>
@@ -56,6 +56,7 @@ include_once 'app/backend.php';
 
 <script>
     function editGroup(groupId) {
-        window.location.href = 'index.php?m=group&p=editgroup&groupid=' + groupId;
+        window.location.href = 'index.php?m=group&p=editgroup&groupid=' + encodeURIComponent(groupId);
     }
 </script>
+لهف 
