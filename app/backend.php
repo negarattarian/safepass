@@ -67,23 +67,26 @@ function show_passwords()
     $db = connection();
     $user_id = $_SESSION['userid'];
 
-//    echo $user_id;
+    echo $user_id;
 
     $result = $db->query("
-        SELECT p.*, g.name as group_name 
-        FROM passwords p 
+        SELECT p.*, g.name as group_name
+        FROM passwords p
         LEFT JOIN group_tbl g ON p.group_id = g.id where p.user_id = $user_id
     ");
     return $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
 
+<<<<<<< HEAD
 function show_password_by_id($id)
 {
     $db = connection();
     $result = $db->query("SELECT * FROM passwords WHERE id = '$id'");
     return $result->fetchAll(PDO::FETCH_ASSOC);
 }
+=======
+>>>>>>> 997fbf50462ba5427adfa2fea60a55af7fce6d75
 
 
 function edit_password($fields, $id)
@@ -146,8 +149,8 @@ function get_passwords_by_group($groupId)
 function show_group_by_id($id)
 {
     $db = connection();
-    $sql = $db->query("SELECT * FROM group_tbl WHERE id = '$id'");
-    return $sql->fetch(PDO::FETCH_ASSOC);
+//    $sql = $db->query("SELECT * FROM group_tbl WHERE id = '$id'");
+//    return $sql->fetch(PDO::FETCH_ASSOC);
 }
 
 
