@@ -78,15 +78,14 @@ function show_passwords()
 }
 
 
-<<<<<<< HEAD
+
 function show_password_by_id($id)
 {
     $db = connection();
     $result = $db->query("SELECT * FROM passwords WHERE id = '$id'");
     return $result->fetchAll(PDO::FETCH_ASSOC);
 }
-=======
->>>>>>> 997fbf50462ba5427adfa2fea60a55af7fce6d75
+
 
 
 function edit_password($fields, $id)
@@ -230,62 +229,62 @@ function restoreDatabase($backupFile)
     // Separate the SQL commands (assuming they are separated by semicolons)
     $commands = explode(';', $sqlCommands);
 
-    try {
-        // Execute each command
-        foreach ($commands as $command) {
-            if (trim($command) != '') {
-                $db->exec($command);
-            }
-        }
+   try {
+    // Execute each command
+    foreach ($commands as $command) {
+        if (trim($command) != '') {
+             $db->exec($command);
+          }
+       }
 
-        // Log the restore action
-        $db->query("INSERT INTO logs (action, user_id, datetime) VALUES ('6', '$user_id', '$current_datetime')");
+       // Log the restore action
+     $db->query("INSERT INTO logs (action, user_id, datetime) VALUES ('6', '$user_id', '$current_datetime')");
 
-        return true; // Success
-    } catch (PDOException $e) {
-        // Optionally log the error or handle it differently
-        return $e->getMessage(); // Return error message
+       return true; // Success
+   } catch (PDOException $e) {
+       // Optionally log the error or handle it differently
+       return $e->getMessage(); // Return error message
     }
 }
 
 function countUserGroups()
 {
     $db = connection();
-    $user_id = $_SESSION['userid'];
+   $user_id = $_SESSION['userid'];
     $result = $db->query("SELECT COUNT(*) as group_count FROM group_tbl WHERE user_id = '$user_id'");
-    $row = $result->fetch(PDO::FETCH_ASSOC);
-    return $row['group_count'];
+   $row = $result->fetch(PDO::FETCH_ASSOC);
+   return $row['group_count'];
 }
 
 function countPasswords()
 {
-    $db = connection();
-    $user_id = $_SESSION['userid'];
+   $db = connection();
+   $user_id = $_SESSION['userid'];
     $result = $db->query("SELECT COUNT(*) as pass_count FROM passwords WHERE user_id = '$user_id'");
-    $row = $result->fetch(PDO::FETCH_ASSOC);
+   $row = $result->fetch(PDO::FETCH_ASSOC);
     return $row['pass_count'];
 }
 
 function show_logs()
 {
-    $user_id = $_SESSION['userid'];
+   $user_id = $_SESSION['userid'];
 
-    $db = connection();
-    $result = $db->query("SELECT * FROM logs where user_id = '$user_id'");
-    return $result->fetchAll(PDO::FETCH_ASSOC);
+   $db = connection();
+   $result = $db->query("SELECT * FROM logs where user_id = '$user_id'");
+   return $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function delete_log($user_id, $id)
 {
-    $db = connection();
-    $sql = "DELETE FROM logs WHERE user_id = '$user_id' AND id = '$id'";
+  $db = connection();
+   $sql = "DELETE FROM logs WHERE user_id = '$user_id' AND id = '$id'";
     $res = $db->exec($sql);
-    return $res;
+   return $res;
 }
 
 function count_logs()
 {
-    $user_id = $_SESSION['userid'];
+  $user_id = $_SESSION['userid'];
     $db = connection();
     $stmt = $db->query("SELECT COUNT(*) AS log_count FROM logs where user_id = '$user_id'");
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
