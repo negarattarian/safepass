@@ -78,7 +78,13 @@ function show_passwords()
 }
 
 
-gi
+function show_password_by_id($id)
+{
+    $db = connection();
+    $result = $db->query("SELECT * FROM passwords WHERE id = '$id'");
+    return $result->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 function edit_password($fields, $id)
 {
