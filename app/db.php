@@ -1,5 +1,5 @@
 <!--change-->
-<?phpgit 
+<?php
 session_start();
 const admin_username = "admin";
 const admin_password = "123";
