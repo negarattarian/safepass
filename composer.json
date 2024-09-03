@@ -1,0 +1,10 @@
+{
+    "name": "rayateam/safepass",
+    "description": "safepass",
+    "authors": [
+        {
+            "name": "negar"
+        }
+    ],
+    "require": {}
+}
